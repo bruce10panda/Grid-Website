@@ -1,0 +1,186 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@font-face {
+    font-family: 'GT Alpina';
+    src: url('assets/GT-Alpina.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --brand-orange: #FF2A00;
+    --brand-yellow: #FFC700;
+    --brand-blue: #0046EB;
+    --brand-green: #24675D;
+    --brand-pink: #EC175A;
+    --brand-purple: #2F2467;
+    --brand-black: #131313;
+    --brand-gray-dark: #4D4D4D;
+    --brand-gray-light: #B2B2B2;
+    --brand-white: #ffffff;
+}
+
+body {
+    background-color: var(--brand-gray-light);
+    color: var(--brand-gray-dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'GT Alpina', serif;
+    font-size: 48px;
+    font-weight: normal;
+    letter-spacing: -2px;
+    color: var(--brand-gray-dark);
+    margin: 0;
+}
+
+p {
+    color: var(--brand-gray-dark);
+    font-size: 20px;
+    margin: 0;
+}
+
+.rounded {
+    font-family: 'nunito';
+    font-weight: 900;
+}
+
+.container {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainIMG {
+    max-width: 100%;
+    max-height: 70vh;
+}
+
+.info {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: var(--brand-white);
+    background-color: #FF2A00;
+    padding: 20px;
+    border-radius: 16px;
+    text-decoration: none;
+}
+
+.slideshow-container {
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden; /* Hides the images not currently in view */
+    position: relative;
+    cursor: grab;
+    user-select: none;
+}
+
+.slides-inner {
+    display: flex; /* Lines images up horizontally */
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* The sliding animation */
+    width: 800%; /* 100% * number of slides */
+    transform: translateX(-100vw);
+}
+
+.mySlides {
+    display: block !important; /* Keep them all "active" now */
+    width: 100vw; /* Each slide takes full width */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.mySlides img {
+    width: 100%;
+    max-height: 80dvh;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+.dots {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  background-color: #848484;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #272727;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.colors {
+    height: 24px;
+}
+
+.color {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.orange {
+    background-color: var(--brand-orange);
+}
+
+.yellow {
+    background-color: var(--brand-yellow);
+}
+
+.blue {
+    background-color: var(--brand-blue);
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+
+@media (max-aspect-ratio: 4/5) {
+    .info {
+        right: 2rem;
+        width: auto;
+    }
+}

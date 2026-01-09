@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Grid.Design</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+    <script type="text/javascript">
+        var PayhipConfig = {
+            enableCart: true
+        };
+    </script>   
+</head>
+<body>
+<div class="slideshow-container">
+  <div class="slides-inner" id="slideRow">
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-blue-2.png"></div>
+    
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-orange-1.png"></div>
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-orange-2.png"></div>
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-yellow-1.png"></div>
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-yellow-2.png"></div>
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-blue-1.png"></div>
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-blue-2.png"></div>
+
+    <div class="mySlides"><img src="assets/productImages/Charge/charge-orange-1.png"></div>
+  </div>
+</div>
+
+    <div class="info">
+        <div>
+            <h1>Grid Charge 1</h1>
+            <p>Beautifully functional. Functionally beautiful.</p>
+        </div>
+        <div class="colors">
+            <div class="color orange" onclick="currentSlide(1)"></div>
+            <div class="color yellow" onclick="currentSlide(3)"></div>
+            <div class="color blue" onclick="currentSlide(5)"></div>
+        </div>
+        <a href="https://payhip.com/b/eMjUK" class="payhip-add-to-cart-button btn " data-theme="none" data-product="eMjUK"><span class="rounded">Add to Cart</span><span>€35</span></a>
+        <div style="text-align:center" class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+        </div>
+    </div>
+</body>
+<script>
+let slideIndex = 1; // Start at 1 (skipping the first clone)
+const slideRow = document.getElementById('slideRow');
+const dots = document.getElementsByClassName("dot");
+const slides = document.querySelectorAll('.mySlides');
+const totalOriginalSlides = slides.length - 2; // Subtract the 2 clones
+
+function showSlides(n, animated = true) {
+    if (animated) {
+        slideRow.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+    } else {
+        slideRow.style.transition = 'none';
+    }
+
+    // Move based on index (index 1 is the first real slide)
+    const percent = n * -100;
+    slideRow.style.transform = `translateX(${percent}vw)`;
+
+    updateDots(n);
+}
+
+function updateDots(n) {
+    let displayIndex = n;
+    if (n > totalOriginalSlides) displayIndex = 1;
+    if (n < 1) displayIndex = totalOriginalSlides;
+
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    if (dots[displayIndex - 1]) {
+        dots[displayIndex - 1].className += " active";
+    }
+}
+
+// Logic to handle the "Instant Jump" for infinite looping
+slideRow.addEventListener('transitionend', () => {
+    if (slideIndex > totalOriginalSlides) {
+        slideIndex = 1;
+        showSlides(slideIndex, false);
+    }
+    if (slideIndex < 1) {
+        slideIndex = totalOriginalSlides;
+        showSlides(slideIndex, false);
+    }
+});
+
+let startX = 0;
+let isDragging = false;
+
+const dragStart = (e) => {
+    isDragging = true;
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+};
+
+const dragEnd = (e) => {
+    if (!isDragging) return;
+    let endX = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+    
+    const threshold = 50;
+    if (endX < startX - threshold) {
+        plusSlides(1); // Swipe Left -> Next
+    } else if (endX > startX + threshold) {
+        plusSlides(-1); // Swipe Right -> Prev
+    } else {
+        showSlides(slideIndex); // Snap back if swipe was too short
+    }
+    isDragging = false;
+};
+
+// These helper functions are now properly linked
+function plusSlides(n) { 
+    slideIndex += n;
+    showSlides(slideIndex); 
+}
+
+function currentSlide(n) { 
+    slideIndex = n;
+    showSlides(slideIndex); 
+}
+
+// Event Listeners
+const container = document.querySelector('.slideshow-container');
+container.addEventListener('mousedown', dragStart);
+window.addEventListener('mouseup', dragEnd);
+container.addEventListener('touchstart', dragStart, {passive: true});
+container.addEventListener('touchend', dragEnd);
+container.addEventListener('dragstart', (e) => e.preventDefault());
+
+// Initial position (without animation)
+showSlides(slideIndex, false);
+</script>
+</html>
