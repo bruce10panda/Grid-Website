@@ -98,7 +98,7 @@ p {
 
 .slides-inner {
     display: flex; /* Lines images up horizontally */
-    height: 100%;
+    height: 100dvh;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* The sliding animation */
     width: 800%; /* 100% * number of slides */
     transform: translateX(-100vw);
@@ -107,8 +107,8 @@ p {
 .mySlides {
     display: block !important; /* Keep them all "active" now */
     width: 100vw; /* Each slide takes full width */
-    height: 100%;
-    display: flex;
+    height: 100dvh;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
@@ -116,7 +116,7 @@ p {
 
 .mySlides img {
     width: 100%;
-    max-height: 80dvh;
+    max-height: 50dvh;
     pointer-events: none;
     object-fit: contain;
 }
@@ -152,12 +152,21 @@ p {
     height: 24px;
 }
 
+/* Add this to your style.css */
 .color {
     cursor: pointer;
     height: 24px;
     width: 24px;
     display: inline-block;
     border-radius: 50%;
+    /* Add a transition for a smooth effect */
+    transition: outline 0.2s ease, outline-offset 0.2s ease; 
+    outline: 2px solid transparent;
+}
+
+/* The visual indicator style */
+.color.active-color {
+    outline: 1px solid var(--brand-gray-dark);
 }
 
 .orange {
@@ -172,6 +181,16 @@ p {
     background-color: var(--brand-blue);
 }
 
+#btn-charge-orange, 
+#btn-charge-yellow, 
+#btn-charge-blue {
+    display: none;
+}
+
+.active-btn {
+    display: flex !important; /* Overrides the display: none */
+}
+
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
@@ -182,5 +201,9 @@ p {
     .info {
         right: 2rem;
         width: auto;
+    }
+
+    .mySlides {
+        padding-bottom: 150px;
     }
 }

@@ -36,11 +36,13 @@
             <p>Beautifully functional. Functionally beautiful.</p>
         </div>
         <div class="colors">
-            <div class="color orange" onclick="currentSlide(1)"></div>
+            <div class="color orange active-color" onclick="currentSlide(1)"></div>
             <div class="color yellow" onclick="currentSlide(3)"></div>
             <div class="color blue" onclick="currentSlide(5)"></div>
         </div>
-        <a href="https://payhip.com/b/eMjUK" class="payhip-add-to-cart-button btn " data-theme="none" data-product="eMjUK"><span class="rounded">Add to Cart</span><span>€35</span></a>
+        <a href="https://payhip.com/b/AiJOa" class="payhip-add-to-cart-button btn active-btn" data-theme="none" data-product="AiJOa" id="btn-charge-orange"><span class="rounded">Add to Cart</span><span>€35</span></a>
+        <a href="https://payhip.com/b/iuMXd" class="payhip-add-to-cart-button btn " data-theme="none" data-product="iuMXd" id="btn-charge-yellow"><span class="rounded">Add to Cart</span><span>€35</span></a>
+        <a href="https://payhip.com/b/eMjUK" class="payhip-add-to-cart-button btn " data-theme="none" data-product="eMjUK" id="btn-charge-blue"><span class="rounded">Add to Cart</span><span>€35</span></a>
         <div style="text-align:center" class="dots">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
@@ -129,6 +131,30 @@ function plusSlides(n) {
 function currentSlide(n) { 
     slideIndex = n;
     showSlides(slideIndex); 
+
+    // 1. Handle Color Circles (Visual Indicator)
+    const colorDivs = document.querySelectorAll('.color');
+    colorDivs.forEach(div => div.classList.remove('active-color'));
+
+    // 2. Handle Add to Cart Buttons
+    const btnOrange = document.getElementById('btn-charge-orange');
+    const btnYellow = document.getElementById('btn-charge-yellow');
+    const btnBlue = document.getElementById('btn-charge-blue');
+
+    // Remove active class from all buttons first
+    [btnOrange, btnYellow, btnBlue].forEach(btn => btn.classList.remove('active-btn'));
+
+    // Determine which color/button to highlight based on slide index
+    if (n === 1 || n === 2) {
+        colorDivs[0].classList.add('active-color');
+        btnOrange.classList.add('active-btn');
+    } else if (n === 3 || n === 4) {
+        colorDivs[1].classList.add('active-color');
+        btnYellow.classList.add('active-btn');
+    } else if (n === 5 || n === 6) {
+        colorDivs[2].classList.add('active-color');
+        btnBlue.classList.add('active-btn');
+    }
 }
 
 // Event Listeners
