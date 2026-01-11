@@ -31,6 +31,7 @@ body {
   font-weight: 500;
   padding: 0px;
   margin: 0;
+  overflow: hidden;
 }
 
 h1 {
@@ -69,6 +70,7 @@ p {
   transition: filter 0.3s ease;
   filter: invert(26%) sepia(0%) saturate(1544%) hue-rotate(156deg) brightness(91%) contrast(75%);
   cursor: pointer;
+  user-select: none;
 }
 
 .header.menu-open .icon {
@@ -146,7 +148,115 @@ p {
   pointer-events: none;
 }
 
+.modal2 a {
+  text-decoration: none;
+}
+
 /* --- END ANIMATED MENU --- */
+
+.modalbg1 {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  
+  /* Change display:none to opacity/visibility for transitions */
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.modalbg1.modal-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modalbg1.modal-visible .modal1 {
+  transform: translateY(0) scale(1);
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal1 {
+  background-color: var(--brand-gray-light);
+  height: calc(100dvh - 32px);
+  width: calc(100dvw - 32px);
+  max-width: 90dvh;
+  border-radius: 22px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column; 
+  overflow: hidden;
+
+  /* Start position: slightly lower and scaled down */
+  transform: translateY(30px) scale(0.98);
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.modalbg1.active {
+  display: flex;
+}
+
+.titlecontainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 12px;
+}
+
+.specitemlist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 8px;
+}
+
+.specitem {
+  background-color: var(--brand-yellow);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  border-radius: 90px;
+}
+
+.specitemlist .uppercase {
+  text-transform: uppercase;
+}
+
+.specitemlist .category {
+  display: flex;
+  padding: 2px 0;
+  align-items: flex-end;
+}
+
+/* 1. The width of the entire scrollbar */
+.specitemlist::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* 3. The thumb (the draggable bit) */
+.specitemlist::-webkit-scrollbar-thumb {
+  background: var(--brand-gray-dark); /* Using your dark gray variable */
+  border-radius: 10px;
+  border: 2px solid var(--brand-gray-light); /* Adds padding around the thumb */
+}
+
+/* 4. The thumb on hover */
+.specitemlist::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-orange); /* Turns orange when you hover it */
+}
 
 .container {
   height: 100dvh;
@@ -162,11 +272,18 @@ p {
 
 .info {
   position: absolute;
-  bottom: 2rem;
-  left: 2rem;
+  bottom: 16px;
+  left: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.colorsinfocontainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn {
@@ -274,5 +391,9 @@ p {
   }
   .mySlides {
     padding-bottom: 150px;
+  }
+
+  .modal1 {
+    max-width: none;
   }
 }
