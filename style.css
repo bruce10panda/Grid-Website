@@ -22,7 +22,7 @@
   --brand-gray-dark: #4D4D4D;
   --brand-gray-light: #B2B2B2;
   --brand-white: #ffffff;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 body {
@@ -32,7 +32,7 @@ body {
   font-weight: 500;
   padding: 0px;
   margin: 0;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 h1 {
