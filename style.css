@@ -22,6 +22,7 @@
   --brand-gray-dark: #4D4D4D;
   --brand-gray-light: #B2B2B2;
   --brand-white: #ffffff;
+  overflow: hidden;
 }
 
 body {
